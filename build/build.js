@@ -1,12 +1,18 @@
 require('./check-versions')()
 
+const chalk = require('chalk')
+const argvLast = process.argv[process.argv.length - 1]
+if (argvLast === 'swan' || argvLast === 'tt' || argvLast === 'wx' || argvLast === 'my') {
+  console.log(chalk.red('请输入需要构建的project. eg: npm run build 项目名称'));
+  process.exit(0);
+}
 process.env.NODE_ENV = 'production'
-process.env.PLATFORM = process.argv[process.argv.length - 1] || 'wx'
+process.env.PLATFORM = process.argv[process.argv.length - 2] || 'wx'
+process.env.PROJECT_NAME = argvLast || 'demo'
 
 var ora = require('ora')
 var rm = require('rimraf')
 var path = require('path')
-var chalk = require('chalk')
 var webpack = require('webpack')
 var config = require('../config')
 var webpackConfig = require('./webpack.prod.conf')

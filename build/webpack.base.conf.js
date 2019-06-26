@@ -9,6 +9,7 @@ var MpvuePlugin = require('webpack-mpvue-asset-plugin')
 var glob = require('glob')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var relative = require('relative')
+var projectName = process.env.PROJECT_NAME
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -24,8 +25,8 @@ function getEntry (rootSrc) {
    return map;
 }
 
-const appEntry = { app: resolve('./src/main.js') }
-const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
+const appEntry = { app: resolve(`./src/projects/${projectName}/main.js`) }
+const pagesEntry = getEntry(resolve(`./src/projects/${projectName}`), 'pages/**/main.js')
 const entry = Object.assign({}, appEntry, pagesEntry)
 
 let baseWebpackConfig = {
@@ -46,7 +47,8 @@ let baseWebpackConfig = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue': 'mpvue',
-      '@': resolve('src')
+      '@': resolve('src'),
+      '@@': resolve(`./src/projects/${projectName}`)
     },
     symlinks: false,
     aliasFields: ['mpvue', 'weapp', 'browser'],
@@ -112,12 +114,14 @@ let baseWebpackConfig = {
       'mpvuePlatform': 'global.mpvuePlatform'
     }),
     new MpvuePlugin(),
+    /*---------------------------------------*/
     new CopyWebpackPlugin([{
       from: '**/*.json',
       to: ''
     }], {
-      context: 'src/'
+      context: `src/projects/${projectName}/`
     }),
+    /*---------------------------------------*/
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),

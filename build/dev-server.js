@@ -1,6 +1,16 @@
 require('./check-versions')()
-
-process.env.PLATFORM = process.argv[process.argv.length - 1] || 'wx'
+/*-----------------------------------------------------------------------------------*/
+const chalk = require('chalk')
+const argvLast = process.argv[process.argv.length - 1]
+// 判断开发者是否输入启动的项目名称
+if (argvLast === 'swan' || argvLast === 'tt' || argvLast === 'wx' || argvLast === 'my') {
+  console.log(chalk.red('请输入需要运行的project. eg: npm run dev 项目名称'));
+  process.exit(0);
+}
+process.env.PLATFORM = process.argv[process.argv.length - 2] || 'wx'
+process.env.PROJECT_NAME = argvLast || 'demo'
+console.log(JSON.stringify(process.argv))
+/*-----------------------------------------------------------------------------------*/
 var config = require('../config')
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
