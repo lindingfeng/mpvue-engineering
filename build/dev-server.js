@@ -9,7 +9,6 @@ if (argvLast === 'swan' || argvLast === 'tt' || argvLast === 'wx' || argvLast ==
 }
 process.env.PLATFORM = process.argv[process.argv.length - 2] || 'wx'
 process.env.PROJECT_NAME = argvLast || 'demo'
-console.log(JSON.stringify(process.argv))
 /*-----------------------------------------------------------------------------------*/
 var config = require('../config')
 if (!process.env.NODE_ENV) {

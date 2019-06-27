@@ -2,6 +2,8 @@
 
 module.exports = {
   "plugins": {
+    // 改插件用于解析vue style下的postcss语法
+    "precss": {},
     "postcss-mpvue-wxss": {}
   }
 }
