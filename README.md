@@ -46,9 +46,13 @@
 
 ## 使用模板
 
-### 方式一：vue init lindingfeng/engineering#vue projectName
+```
+vue init lindingfeng/engineering#vue projectName
 
-### 方式二：git clone https://github.com/lindingfeng/vue-engineering.git
+or
+
+git clone https://github.com/lindingfeng/vue-engineering.git
+```
 
 ## 开发
 
