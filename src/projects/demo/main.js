@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import store from './store/index'
 import demoApi from './apis/demoApi'
+// import './mock'
 
 Vue.config.productionTip = false
 App.mpType = 'app'
